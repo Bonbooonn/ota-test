@@ -89,7 +89,7 @@ export default {
       const result = await useLogin(formData.value);
       alert(result.message);
       if (result.success) {
-        router.push('/');
+        await router.push('/');
       }
     }
 

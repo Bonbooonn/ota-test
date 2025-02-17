@@ -25,7 +25,7 @@ export default {
 
       if (!error.value) {
         alert(message);
-        router.push('/');
+        await router.push('/');
       } else {
         setTimeout(() => router.push('SignIn'), 3000);
       }

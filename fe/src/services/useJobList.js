@@ -14,7 +14,7 @@ export function useJobList() {
             });
             if (response.ok) {
                 const data = await response.json();
-                jobList.value = data.data; // Correctly update jobList
+                jobList.value = data.data;
             }
         } catch (error) {
             console.error('Failed to fetch job list:', error);
