@@ -8,7 +8,10 @@
               <div class="text-sm text-gray-800 font-semibold mb-1">{{item.name}}</div>
             </div>
             <div class="mb-2">
-              <router-link class="text-lg text-gray-800 font-bold" :to="'job-post.html'">
+              <router-link
+                  class="text-lg text-gray-800 font-bold"
+                  :to="{ name: 'JobPost', params: { isInternal: item.is_internal ? 1 : 0, id: item.id } }"
+              >
                 <span v-html="transformDescription(item.description)"></span>
               </router-link>
             </div>
