@@ -50,7 +50,10 @@ class JobPostTransformer
 
     public function transform(Collection $internal, Collection $external): Collection
     {
-        $internalJobPosts = $internal->map(fn($jobPost) => $this->transformInternal($jobPost));
+        $internalJobPosts = collect();
+        if (!$internal->isEmpty()) {
+            $internalJobPosts = $internal->map(fn($jobPost) => $this->transformInternal($jobPost));
+        }
 
         $externalJobPosts = collect($external->get('position', []))
             ->map(fn($jobPost) => $this->transformExternal($jobPost));

@@ -38,3 +38,9 @@ create-feature-test: ## Create a new feature test
 
 run-tests: ## Run the tests
 	docker exec -t $(ENV)-be-api-api sh -c "cd /home/dev/app && php artisan test --coverage --min=95 --no-ansi"
+
+composer-install: ## Run composer install
+	docker exec -it $(ENV)-be-api-api sh -c "cd /home/dev/app && composer install"
+
+generate-key: ## Generate the app key
+	docker exec -t $(ENV)-be-api-api sh -c "cd /home/dev/app && php artisan key:generate"
