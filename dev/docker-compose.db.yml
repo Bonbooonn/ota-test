@@ -1,0 +1,23 @@
+networks:
+  default:
+    external: true
+    name: "${DEFAULT_NETWORK}"
+
+volumes:
+  db-data:
+    driver: local
+    name: "${DOCKER_COMPOSE_ENV}-db-data"
+
+services:
+  app-database:
+    image: mysql:8.4.2
+    container_name: "${DOCKER_COMPOSE_ENV}-app-database"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    ports:
+      -   "${DB_PORT}:3306"
+    volumes:
+      -   db-data:/var/lib/mysql

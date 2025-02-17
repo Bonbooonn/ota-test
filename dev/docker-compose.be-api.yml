@@ -1,0 +1,36 @@
+networks:
+  default:
+    external: true
+    name: "${DEFAULT_NETWORK}"
+
+services:
+  be-api-server:
+    image: 'nginx:stable-alpine'
+    container_name: "${DOCKER_COMPOSE_ENV}-be-api-server"
+    restart: on-failure
+    volumes:
+      - ../be-api:/home/dev/app
+      - ./nginx/conf.d/be-api.conf:/etc/nginx/conf.d/default.conf
+      - ./certs/${CERT}.crt:/etc/nginx/ssl/nginx.crt:ro
+      - ./certs/${CERT}.key:/etc/nginx/ssl/nginx.key:ro
+    networks:
+      - default
+    ports:
+      - "80"
+
+  be-api-api:
+    build:
+      context: .
+      dockerfile: php/Dockerfile
+      args:
+        INSTALL_XDEBUG: "${INSTALL_XDEBUG}"
+    container_name: "${DOCKER_COMPOSE_ENV}-be-api-api"
+    restart: on-failure
+    volumes:
+      - ../be-api:/home/dev/app
+    environment:
+      - INSTALL_XDEBUG=${INSTALL_XDEBUG}
+    networks:
+      - default
+    expose:
+      - 9000
