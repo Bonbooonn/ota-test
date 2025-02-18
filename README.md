@@ -5,6 +5,9 @@ Requisites
 - Docker
 - Postman
 - Npm
+- Install Make in your wsl2 machine for windows, for macOS just install it directly.
+  - MacOS: brew install make
+  - Windows WSL2: apt-get -y install make
 
 To run the application.
 - Clone the repository **(git clone https://github.com/Bonbooonn/ota-test.git)**
